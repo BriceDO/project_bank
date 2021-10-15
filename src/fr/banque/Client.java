@@ -7,6 +7,7 @@ public class Client {
 	private int age;
 	private int numero;
 	// comptes de type tableau de fr.banque.Compte (maximum 5)
+	private int[] compte = new int[5];
 	
 	
 
