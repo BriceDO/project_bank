@@ -1,33 +1,41 @@
 package fr.banque;
 
+import java.util.Objects;
+
 public class Compte {
 	
 	private int numero;
 	private double solde;
 	
-	public Compte() {}
+	public Compte() {
+		super();
+	}
 
 	public Compte(int numero, double solde) {
+		super();
 		this.numero = numero;
 		this.solde = solde;
 	}
 	
-	//qui ajoute de l'argent au solde du compte
+	/**
+	 * qui ajoute de l'argent au solde du compte
+	 * @param double unMontant
+	 */
 	public void ajouter(double unMontant) {
-		this.solde += unMontant;
+		this.setSolde(this.getSolde()+unMontant);
 	}
 	
-	//qui retire de l'argent au solde du compte
+	/**
+	 * qui retire de l'argent au solde du compte
+	 * @param double unMontant
+	 */
 	public void retirer(double unMontant) {
-		this.solde -= unMontant;
+		// TODO arrondi du double
+		this.setSolde(Math.round(this.getSolde()-unMontant));
 	}
 
 	public int getNumero() {
 		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
 	}
 
 	public double getSolde() {
@@ -40,11 +48,25 @@ public class Compte {
 
 	@Override
 	public String toString() {
-		return "Compte [numero=" + numero + ", solde=" + solde + "]";
+		return "Compte [solde=" + this.getSolde() + ", numero=" + this.getNumero() + "]";
 	}
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numero, solde);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Compte other = (Compte) obj;
+		return numero == other.numero && Double.doubleToLongBits(solde) == Double.doubleToLongBits(other.solde);
+	}
 	
 	
 }
